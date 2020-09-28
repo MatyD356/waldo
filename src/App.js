@@ -20,7 +20,7 @@ function App() {
 
   return (
     <div className="App">
-      <AsideMenu />
+      <AsideMenu characters={characters} />
       <main>
         <PhotoContainer characters={characters} updateCharacters={updateCharacters} />
       </main>

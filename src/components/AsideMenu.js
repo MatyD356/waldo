@@ -2,7 +2,7 @@ import React from 'react'
 import '../styles/AsideMenu.scss'
 
 
-const AsideMenu = () => {
+const AsideMenu = ({ characters }) => {
 
   return (
     <aside className="AsideMenu">
@@ -16,9 +16,7 @@ const AsideMenu = () => {
         </ul>
       </nav>
       <ul className="character-list">
-        <li>waldoo</li>
-        <li>wenda</li>
-        <li>wizard</li>
+        {characters.map(item => <li key={item.x}>{item.name}:{item.hit.toString()}</li>)}
       </ul >
     </aside >
   )
