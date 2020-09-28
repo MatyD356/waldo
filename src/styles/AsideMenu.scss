@@ -1,0 +1,7 @@
+@use 'variables';
+
+.AsideMenu{
+  background-color: variables.$myBlue;
+  width: 20vw;
+  height: 100vh;
+}
