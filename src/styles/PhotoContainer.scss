@@ -1,8 +1,10 @@
+@use './variables';
 .PhotoContainer{
+  border: 5px solid variables.$myBlue;
+  border-radius: 5px;
   display: flex;
   justify-content: center;
   position: relative;
-  width: fit-content;
 
   .waldoPhoto{
     -webkit-user-select: none;

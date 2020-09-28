@@ -1,9 +1,12 @@
+@use './styles/variables';
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 .App {
+  font-family: variables.$myFont;
+  color: #fff;
   text-align: center;
   display: flex;
   align-items: center;
