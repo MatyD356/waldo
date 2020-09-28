@@ -1,0 +1,30 @@
+@use 'variables';
+
+.Circle{
+  position: absolute;
+  border-radius: 50%;
+  border: 3px dashed rgb(63, 62, 62);
+  background-color: rgba(63, 62, 62, 0.37);
+  left: var(--x);
+  top: var(--y);
+  height: 50px;
+  width: 50px;
+  transform: translate()
+}
+.wenda, .waldo, .wizard{
+  border: 3px dashed variables.$myBlue;
+  background-color: transparent;
+}
+
+.wenda{  
+  left: var(--wendax);
+  top: var(--wenday);
+}
+.waldo{
+  left: var(--waldox);
+  top: var(--waldoy);
+}
+.wizard{
+  left: var(--wizardx);
+  top: var(--wizardy);
+}

@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
-import '../Styles/Square.scss'
+import '../styles/Circle.scss'
 
-const Circle = ({ cords }) => {
+const Circle = ({ cords, main, name }) => {
   useEffect(() => {
     if (cords.x > 50 || cords.y > 50) {
-      document.documentElement.style.setProperty('--x', cords.x - 25 + 'px')
-      document.documentElement.style.setProperty('--y', cords.y - 25 + 'px')
-    } else {
+      document.documentElement.style.setProperty(`--${name ? name : ''}x`, cords.x - 25 + 'px')
+      document.documentElement.style.setProperty(`--${name ? name : ''}y`, cords.y - 25 + 'px')
+    } else if (main) {
       //allowing user to click within circle and change it's position
       const prevCords = getStyle()
       document.documentElement.style.setProperty('--x', prevCords.x + cords.x - 25 + 'px')
@@ -21,7 +21,7 @@ const Circle = ({ cords }) => {
     return { x: left, y: top }
   }
   return (
-    <div className="Circle" />
+    <div className={`Circle ${name ? name : ''}`} />
   )
 }
 export default Circle
