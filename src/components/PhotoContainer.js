@@ -1,13 +1,46 @@
-import React, { useState } from 'react'
-import '../Styles/PhotoContainer.scss'
-import waldoOne from '../waldo.png'
+import React, { useState, useEffect } from 'react'
+import '../styles/PhotoContainer.scss'
 import Circle from './Circle'
 
-const PhotoContainer = () => {
+import { getPicture } from '../Firebase.js'
 
-  const [lastClick, setLastClick] = useState(null)
+const PhotoContainer = ({ characters, updateCharacters }) => {
+
+  const [lastClick, setLastClick] = useState({ x: '', y: '' })
+  const [currentImg, setcurrentImg] = useState('')
+
+  //get data from database
+  useEffect(() => {
+    getPicture(setcurrentImg)
+  }, [])
+
+  //change characters hit if lastClick was near
+  useEffect(() => {
+    updateCharacters(
+      characters.map(item => {
+        if (item.x < lastClick.x + 25 && item.x > lastClick.x - 25
+          && item.y < lastClick.y + 25 && item.y > lastClick.y - 25) {
+          item.hit = true
+          return item
+        }
+        return item
+      })
+    )
+  }, [JSON.stringify(characters), lastClick.x, lastClick.y])
+
+  //check if user found all characters
+  useEffect(() => {
+    if (characters.length > 1) {
+      let hits = characters.filter(item => item.hit === true)
+      if (hits.length === characters.length) {
+        alert('u won')
+      }
+    }
+  }, [JSON.stringify(characters)])
   const handleClick = (e) => {
-    setLastClick({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY })
+    let newX = e.nativeEvent.offsetX
+    let newY = e.nativeEvent.offsetY
+    setLastClick({ x: newX, y: newY })
   }
   return (
     <div
@@ -15,10 +48,17 @@ const PhotoContainer = () => {
       className='PhotoContainer'>
       <img
         className='waldoPhoto'
-        src={waldoOne}
+        src={`${currentImg}`}
         alt='waldo one'
       />
-      {lastClick ? <Circle cords={lastClick} /> : null}
+      {characters ? characters.map((item, index) => {
+        if (item.hit) {
+          return <Circle key={index} cords={{ x: item.x, y: item.y }} main={false} name={item.name} />
+        } else {
+          return null
+        }
+      }) : null}
+      {lastClick ? <Circle cords={lastClick} main={true} /> : null}
     </div>
   )
 }

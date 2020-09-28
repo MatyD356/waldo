@@ -1,9 +1,12 @@
 .PhotoContainer{
+  display: flex;
+  justify-content: center;
   position: relative;
+  width: fit-content;
+
   .waldoPhoto{
     -webkit-user-select: none;
     -webkit-user-drag: none;
-    width: 100%;
     display: block;
   }
 }
