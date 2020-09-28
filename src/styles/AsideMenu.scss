@@ -1,7 +1,60 @@
 @use 'variables';
-
+ main{
+   overflow-y: scroll;
+ }
 .AsideMenu{
   background-color: variables.$myBlue;
   width: 20vw;
   height: 100vh;
+  border-right: 2px solid white;
+
+  .title{
+    font-size: 3rem;
+    margin: 1rem;
+  }
+  .sub-title{
+    margin-bottom: 2rem;
+  }
+  .nav-list{
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    margin-bottom:2rem;
+
+    .nav-item{
+      cursor: pointer;
+      color: variables.$myBlue;
+      background-color: #fff;
+      border-radius: 5px;
+      width: 25%;
+      padding: 0.75rem 0;
+    }
+  }
+  .character-list{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+
+  .character-item{
+    font-size: 2rem;
+    margin: 1rem;
+    padding: 1rem 0;
+    width: 75%;
+    display: flex;
+    background-color: #fff;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 5px;
+  .red{
+    color: variables.$myRed
+  }
+  .green{
+    color: variables.$myGreen
+  }
+  .avatar{
+    border-radius: 50%;
+    height: 50px;
+  }}
+}
 }
