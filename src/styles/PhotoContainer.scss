@@ -4,8 +4,31 @@
   border-radius: 5px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 80%;
+  min-height: 50vh;
   position: relative;
 
+  .game-controls{
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    background-color:  variables.$myRed;
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/waldo-12be8.appspot.com/o/images%2Fpicture-one-min.png?alt=media&token=5713f946-84ff-41b6-bb22-20d46552a27c');
+    justify-content: space-around;
+    background-blend-mode: multiply;
+    align-items: center;
+
+    .control-button{
+      cursor: pointer;
+      background-color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 1rem 2rem;
+      font-size: 2rem;
+      color: variables.$myBlue;
+    }
+  }
   .waldoPhoto{
     -webkit-user-select: none;
     -webkit-user-drag: none;
