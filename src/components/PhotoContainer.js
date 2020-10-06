@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import '../styles/PhotoContainer.scss'
 import Circle from './Circle'
+import GameControls from './GameControls'
 
-import { getPicture } from '../Firebase.js'
-
-const PhotoContainer = ({ characters, updateCharacters, gameOn, updateGameOn }) => {
+const PhotoContainer = ({ characters, updateCharacters, gameOn, updateGameOn, currentImg, loadImage }) => {
 
   const [lastClick, setLastClick] = useState({ x: -1000, y: -1000 })
-  const [currentImg, setcurrentImg] = useState('')
-
-  //get data from database
-  useEffect(() => {
-    getPicture(setcurrentImg)
-  }, [])
 
   //change characters hit if lastClick was near
   useEffect(() => {
@@ -25,7 +18,7 @@ const PhotoContainer = ({ characters, updateCharacters, gameOn, updateGameOn }) 
         }
         return item
       })
-    )
+    )// eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(characters), lastClick.x, lastClick.y])
 
   //check if user found all characters
@@ -36,22 +29,35 @@ const PhotoContainer = ({ characters, updateCharacters, gameOn, updateGameOn }) 
         alert('u won')
         updateGameOn(!gameOn)
       }
-    }
+    }// eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(characters)])
 
+  //bug here
   const handleClick = (e) => {
     let newX = e.nativeEvent.offsetX
     let newY = e.nativeEvent.offsetY
     setLastClick({ x: newX, y: newY })
   }
   return (
-    <div onClick={handleClick} className='PhotoContainer'>
-      {/*extract this to new component*/}
-      {!gameOn ? <div className='game-controls'>
-        <button className='control-button' onClick={() => updateGameOn(!gameOn)}>Start</button>
-        <button className='control-button'>See scores</button>
+    <div className='PhotoContainer'>
+      {!gameOn ? <div className='game-controls-container'>
+        <GameControls
+          imgName='picture-one'
+          loadImage={loadImage}
+          gameOn={gameOn}
+          updateGameOn={updateGameOn}
+          updateCharacters={updateCharacters}
+        />
+        <GameControls
+          imgName='picture-two'
+          loadImage={loadImage}
+          gameOn={gameOn}
+          updateGameOn={updateGameOn}
+          updateCharacters={updateCharacters}
+        />
       </div> :
         <img
+          onClick={handleClick}
           className='waldoPhoto'
           src={`${currentImg}`}
           alt='waldo one'

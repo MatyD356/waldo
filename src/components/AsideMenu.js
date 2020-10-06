@@ -4,7 +4,7 @@ import CharacterList from './CharacterList'
 
 import '../styles/AsideMenu.scss'
 
-const AsideMenu = ({ characters, gameOn }) => {
+const AsideMenu = ({ characters, gameOn, currentImg }) => {
   const [time, setTime] = useState(0)
   useEffect(() => {
     if (gameOn) {
@@ -20,7 +20,8 @@ const AsideMenu = ({ characters, gameOn }) => {
       <h1 className='title'>Where's Waldo</h1>
       <Navigation />
       <h2 className='sub-title'>Find Waldo and his friends</h2>
-      <CharacterList characters={characters} />
+      {!currentImg ? <h2 className='sub-title'>Choose a picture</h2> :
+        <CharacterList characters={characters} />}
       <div>
         <h2>Your time</h2>
         <p>{time}</p>
