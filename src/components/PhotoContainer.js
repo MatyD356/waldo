@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react'
 import '../styles/PhotoContainer.scss'
 import Circle from './Circle'
 import GameControls from './GameControls'
+import WinInfo from './WinInfo'
 
-const PhotoContainer = ({ characters, updateCharacters, gameOn, updateGameOn, currentImg, loadImage }) => {
+const PhotoContainer = ({ win, setWin, characters, updateCharacters, gameOn, updateGameOn, currentImg, loadImage, time }) => {
 
   const [lastClick, setLastClick] = useState({ x: -1000, y: -1000 })
+
 
   //change characters hit if lastClick was near
   useEffect(() => {
@@ -26,8 +28,7 @@ const PhotoContainer = ({ characters, updateCharacters, gameOn, updateGameOn, cu
     if (characters.length > 1) {
       let hits = characters.filter(item => item.hit === true)
       if (hits.length === characters.length) {
-        alert('u won')
-        updateGameOn(!gameOn)
+        setWin(true)
       }
     }// eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(characters)])
@@ -64,13 +65,21 @@ const PhotoContainer = ({ characters, updateCharacters, gameOn, updateGameOn, cu
         />}
 
       {characters ? characters.map((item, index) => {
-        if (item.hit) {
-          return <Circle key={index} cords={{ x: item.x, y: item.y }} main={false} name={item.name} />
+        if (item.hit && !win) {
+          return <Circle
+            key={index}
+            cords={{ x: item.x, y: item.y }}
+            main={false}
+            name={item.name} />
         } else {
           return null
         }
       }) : null}
-      {lastClick ? <Circle cords={lastClick} main={true} /> : null}
+      {lastClick ? <Circle
+        cords={lastClick}
+        main={true} /> : null
+      }
+      {win ? <WinInfo time={time} /> : null}
     </div>
   )
 }

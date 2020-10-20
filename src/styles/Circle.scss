@@ -11,7 +11,7 @@
   width: 50px;
   transform: translate()
 }
-.wenda, .waldo, .wizard{
+.wenda, .waldo, .wizard, .odlaw{
   border: 3px dashed variables.$myBlue;
   background-color: transparent;
 }
@@ -27,4 +27,8 @@
 .wizard{
   left: var(--wizardx);
   top: var(--wizardy);
+}
+.odlaw{
+  left: var(--odlawx);
+  top: var(--odlawy);
 }

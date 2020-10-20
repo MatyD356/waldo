@@ -1,28 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 
-import { getCharacters } from './Firebase'
 
 import PhotoContainer from './components/PhotoContainer'
 import AsideMenu from './components/AsideMenu'
 
 function App() {
   const [characters, setCharacters] = useState([])
-
-  //get data from database
-  useEffect(() => {
-    getCharacters(setCharacters)
-  }, [])
+  const [currentImg, setcurrentImg] = useState('')
+  const [gameOn, setGameOn] = useState(false)
+  const [win, setWin] = useState(false)
+  const [time, setTime] = useState(0)
 
   const updateCharacters = (newState) => {
     setCharacters(newState)
   }
+  const updateGameOn = (newState) => {
+    setGameOn(newState)
+  }
+  const loadImage = (newState) => {
+    setcurrentImg(newState)
+  }
 
   return (
     <div className="App">
-      <AsideMenu characters={characters} />
+      <AsideMenu
+        win={win}
+        characters={characters}
+        currentImg={currentImg}
+        time={time}
+        setTime={setTime}
+        gameOn={gameOn} />
       <main>
-        <PhotoContainer characters={characters} updateCharacters={updateCharacters} />
+        <PhotoContainer
+          win={win}
+          time={time}
+          setTime={setTime}
+          setWin={setWin}
+          currentImg={currentImg}
+          loadImage={loadImage}
+          characters={characters}
+          updateCharacters={updateCharacters}
+          gameOn={gameOn}
+          updateGameOn={updateGameOn}
+        />
       </main>
     </div>
   );

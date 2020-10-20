@@ -1,5 +1,6 @@
 import * as firebase from 'firebase/app'
 import 'firebase/firebase-firestore'
+import 'firebase/firebase-auth'
 import 'firebase/firebase-storage'
 
 // Your web app's Firebase configuration
@@ -15,17 +16,26 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+/* AUTH */
+const logInAnnonymusly = () => {
+  firebase.auth().signInAnonymously().catch(function (error) {
+    if (error) {
+      console.log(error);
+    }
+  });
+}
+
 /*FIRESTORE*/
 
 // Initialize FireStore
 const db = firebase.firestore();
-const imgOneCharacters = db.collection('picture-one').doc('characters')
 
 //Getting characterInfo
-export const getCharacters = (callback) => {
+export const getCharacters = (callback, collectionName) => {
+  logInAnnonymusly();
+  const imgOneCharacters = db.collection(collectionName).doc('characters')
   imgOneCharacters.get().then(doc => {
     if (doc.exists) {
-      //you need to set hook here
       const data = doc.data().cords
       callback(data)
     } else {
@@ -37,16 +47,54 @@ export const getCharacters = (callback) => {
 
 }
 
-/* STORAGE */
+export const addScore = (callback, name, time, collectionName) => {
+  logInAnnonymusly();
+  const imgScores = db.collection(collectionName).doc('scores')
+  imgScores.get().then(doc => {
+    if (doc.exists) {
+      const data = doc.data().scores
+      db.collection(collectionName).doc('scores').set({
+        scores: [...data, {
+          name,
+          time
+        }]
+      })
+      imgScores.get().then(updatedDoc => {
+        callback(updatedDoc.data().scores)
+      })
+      return data
+    } else {
+      console.log("No such document!");
+    }
+  }).catch(function (error) {
+    console.log("Error getting document:", error);
+  });
+}
+export const getScores = (callback, collectionName) => {
+  logInAnnonymusly();
+  const imgScores = db.collection(collectionName).doc('scores')
+  imgScores.get().then(doc => {
+    if (doc.exists) {
+      const data = doc.data().scores
+      console.log(data);
+      callback(data)
+    } else {
+      console.log("No such document!");
+    }
+  }).catch(function (error) {
+    console.log("Error getting document:", error);
+  });
 
+}
+
+/* STORAGE */
 // Get a reference to the storage service, which is used to create references in your storage bucket
 var storage = firebase.storage();
-
 // Create a storage reference from our storage service
 var storageRef = storage.ref();
 // Get the download URL
-var starsRef = storageRef.child('images/picture-one.png');
-export const getPicture = (callback) => {
+export const getPicture = (callback, imgName) => {
+  const starsRef = storageRef.child(`images/${imgName}`);
   starsRef.getDownloadURL().then((url) => {
     callback(url)
   }).catch(function (error) {

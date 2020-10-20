@@ -1,20 +1,27 @@
 @use './variables';
+
 .PhotoContainer{
-  border: 5px solid variables.$myBlue;
   border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80%;
-  min-height: 50vh;
+  height: fit-content;
   position: relative;
+  overflow: hidden;
+
+  .game-controls-container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 
   .game-controls{
-    width: 100%;
-    height: 50vh;
+    width: 50vw;
+    border: 5px solid variables.$myBlue;
+    height: 30vh;
     display: flex;
     background-color:  variables.$myRed;
-    background-image: url('https://firebasestorage.googleapis.com/v0/b/waldo-12be8.appspot.com/o/images%2Fpicture-one-min.png?alt=media&token=5713f946-84ff-41b6-bb22-20d46552a27c');
     justify-content: space-around;
     background-blend-mode: multiply;
     align-items: center;
@@ -23,11 +30,22 @@
       cursor: pointer;
       background-color: white;
       border: none;
-      border-radius: 5px;
       padding: 1rem 2rem;
+      border: 5px solid variables.$myBlue;
+      border-radius: 5px;
       font-size: 2rem;
       color: variables.$myBlue;
     }
+  }
+  .red{
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/waldo-12be8.appspot.com/o/images%2Fpicture-one-min.png?alt=media&token=5713f946-84ff-41b6-bb22-20d46552a27c');
+    background-color: variables.$myRed;
+  }
+  .yellow{
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/waldo-12be8.appspot.com/o/images%2Fpicture-two-min.png?alt=media&token=04bdee30-7740-46fb-a98a-61c333f37f58');
+    background-size: cover;
+    background-color: variables.$myYellow;
+  }
   }
   .waldoPhoto{
     -webkit-user-select: none;

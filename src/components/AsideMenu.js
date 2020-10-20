@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Navigation from './Navigation'
 import CharacterList from './CharacterList'
 
 import '../styles/AsideMenu.scss'
 
-const AsideMenu = ({ characters, gameOn, currentImg }) => {
-  const [time, setTime] = useState(0)
+const AsideMenu = ({ win, characters, gameOn, currentImg, time, setTime }) => {
+
   useEffect(() => {
-    if (gameOn) {
+    if (gameOn && !win) {
       const interval = setInterval(() => {
         setTime(time => time + 1)
       }, 1000)
       return () => clearInterval(interval)
     }
-  }, [gameOn])
+  }, [gameOn, win, setTime])
 
   return (
     <aside className='AsideMenu'>
