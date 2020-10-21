@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { addScore } from '../Firebase'
 import '../styles/WinInfo.scss'
 
@@ -6,10 +6,6 @@ const WinInfo = ({ time }) => {
   const [scores, setScores] = useState([])
   const [name, setName] = useState('')
   const [scoreSaved, setScoreSaved] = useState(false)
-
-  useEffect(() => {
-    console.log(scores);
-  })
 
   const saveName = (e) => {
     setName(e.target.value)
@@ -34,7 +30,10 @@ const WinInfo = ({ time }) => {
           {scores.length > 0 ? scores.map((item, index) =>
             <li className='win-alert-list-item' key={index}>
               <p>Name: {item.name}</p>
-              <p>Time: {item.time}</p>
+              <p>
+                Time: {item.time.minutes < 10 ? `0${item.time.minutes}` : item.time.minutes}:
+                {item.time.seconds < 10 ? `0${item.time.seconds}` : item.time.seconds}
+              </p>
             </li>) : null}
         </ul>
       </div> : null}

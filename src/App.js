@@ -10,7 +10,7 @@ function App() {
   const [currentImg, setcurrentImg] = useState('')
   const [gameOn, setGameOn] = useState(false)
   const [win, setWin] = useState(false)
-  const [time, setTime] = useState(0)
+  const [time, setTime] = useState({ minutes: 0, seconds: 0 })
 
   const updateCharacters = (newState) => {
     setCharacters(newState)

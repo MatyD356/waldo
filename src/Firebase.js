@@ -60,7 +60,8 @@ export const addScore = (callback, name, time, collectionName) => {
         }]
       })
       imgScores.get().then(updatedDoc => {
-        callback(updatedDoc.data().scores)
+        callback(updatedDoc.data().scores
+          .sort((a, b) => (a.time.minutes * 60 + a.time.seconds) - (b.time.minutes * 60 + b.time.seconds)))
       })
       return data
     } else {

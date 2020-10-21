@@ -9,11 +9,25 @@ const AsideMenu = ({ win, characters, gameOn, currentImg, time, setTime }) => {
   useEffect(() => {
     if (gameOn && !win) {
       const interval = setInterval(() => {
-        setTime(time => time + 1)
+        if (time.seconds === 59) {
+          setTime(time => {
+            return {
+              minutes: time.minutes + 1,
+              seconds: 0
+            }
+          })
+        } else {
+          setTime(time => {
+            return {
+              minutes: time.minutes,
+              seconds: time.seconds + 1
+            }
+          })
+        }
       }, 1000)
       return () => clearInterval(interval)
     }
-  }, [gameOn, win, setTime])
+  }, [gameOn, win, setTime, time.seconds])
 
   return (
     <aside className='AsideMenu'>
@@ -24,7 +38,10 @@ const AsideMenu = ({ win, characters, gameOn, currentImg, time, setTime }) => {
         <CharacterList characters={characters} />}
       <div>
         <h2>Your time</h2>
-        <p>{time}</p>
+        <p>
+          {time.minutes < 10 ? `0${time.minutes}` : time.minutes}:
+          {time.seconds < 10 ? `0${time.seconds}` : time.seconds}
+        </p>
       </div>
     </aside >
   )
