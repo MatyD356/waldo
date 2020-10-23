@@ -18,7 +18,8 @@
 
   .game-controls{
     width: 50vw;
-    border: 5px solid variables.$myBlue;
+    border: 3px solid variables.$myBlue;
+    border-radius: 25px;
     height: 30vh;
     display: flex;
     background-color:  variables.$myRed;
@@ -31,7 +32,6 @@
       background-color: white;
       border: none;
       padding: 1rem 2rem;
-      border: 5px solid variables.$myBlue;
       border-radius: 5px;
       font-size: 2rem;
       color: variables.$myBlue;

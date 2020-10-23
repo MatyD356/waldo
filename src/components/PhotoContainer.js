@@ -7,6 +7,7 @@ import WinInfo from './WinInfo'
 const PhotoContainer = ({ win, setWin, characters, updateCharacters, gameOn, updateGameOn, currentImg, loadImage, time }) => {
 
   const [lastClick, setLastClick] = useState({ x: -1000, y: -1000 })
+  const [imgName, setImgName] = useState('');
 
 
   //change characters hit if lastClick was near
@@ -43,6 +44,7 @@ const PhotoContainer = ({ win, setWin, characters, updateCharacters, gameOn, upd
     <div className='PhotoContainer'>
       {!gameOn ? <div className='game-controls-container'>
         <GameControls
+          setImgName={setImgName}
           imgName='picture-one'
           loadImage={loadImage}
           gameOn={gameOn}
@@ -50,6 +52,7 @@ const PhotoContainer = ({ win, setWin, characters, updateCharacters, gameOn, upd
           updateCharacters={updateCharacters}
         />
         <GameControls
+          setImgName={setImgName}
           imgName='picture-two'
           loadImage={loadImage}
           gameOn={gameOn}
@@ -79,7 +82,7 @@ const PhotoContainer = ({ win, setWin, characters, updateCharacters, gameOn, upd
         cords={lastClick}
         main={true} /> : null
       }
-      {win ? <WinInfo time={time} /> : null}
+      {win ? <WinInfo imgName={imgName} time={time} /> : null}
     </div>
   )
 }

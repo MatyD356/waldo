@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { addScore } from '../Firebase'
 import '../styles/WinInfo.scss'
 
-const WinInfo = ({ time }) => {
+const WinInfo = ({ time, imgName }) => {
   const [scores, setScores] = useState([])
   const [name, setName] = useState('')
   const [scoreSaved, setScoreSaved] = useState(false)
@@ -11,7 +11,7 @@ const WinInfo = ({ time }) => {
     setName(e.target.value)
   }
   const sendName = () => {
-    addScore(setScores, name, time, 'picture-one')
+    addScore(setScores, name, time, imgName)
   }
   return (
     <div className="win-alert">

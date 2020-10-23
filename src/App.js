@@ -12,19 +12,17 @@ function App() {
   const [win, setWin] = useState(false)
   const [time, setTime] = useState({ minutes: 0, seconds: 0 })
 
-  const updateCharacters = (newState) => {
-    setCharacters(newState)
+  const reset = () => {
+    setCharacters([])
+    setcurrentImg('')
+    setGameOn(false)
+    setWin(false)
+    setTime({ minutes: 0, seconds: 0 })
   }
-  const updateGameOn = (newState) => {
-    setGameOn(newState)
-  }
-  const loadImage = (newState) => {
-    setcurrentImg(newState)
-  }
-
   return (
     <div className="App">
       <AsideMenu
+        reset={reset}
         win={win}
         characters={characters}
         currentImg={currentImg}
@@ -38,11 +36,11 @@ function App() {
           setTime={setTime}
           setWin={setWin}
           currentImg={currentImg}
-          loadImage={loadImage}
+          loadImage={setcurrentImg}
           characters={characters}
-          updateCharacters={updateCharacters}
+          updateCharacters={setCharacters}
           gameOn={gameOn}
-          updateGameOn={updateGameOn}
+          updateGameOn={setGameOn}
         />
       </main>
     </div>
