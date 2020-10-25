@@ -4,7 +4,7 @@ import CharacterList from './CharacterList'
 
 import '../styles/AsideMenu.scss'
 
-const AsideMenu = ({ win, characters, gameOn, currentImg, time, setTime, reset }) => {
+const AsideMenu = ({ win, characters, gameOn, currentImg, time, setTime, reset, setHowTo }) => {
 
   useEffect(() => {
     if (gameOn && !win) {
@@ -32,7 +32,7 @@ const AsideMenu = ({ win, characters, gameOn, currentImg, time, setTime, reset }
   return (
     <aside className='AsideMenu'>
       <h1 className='title'>Where's Waldo</h1>
-      <Navigation reset={reset} />
+      <Navigation reset={reset} setHowTo={setHowTo} />
       {!currentImg ? <h2 className='sub-title'>Choose a picture</h2> :
         <CharacterList characters={characters} />}
       <div>

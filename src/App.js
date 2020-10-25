@@ -10,9 +10,11 @@ function App() {
   const [currentImg, setcurrentImg] = useState('')
   const [gameOn, setGameOn] = useState(false)
   const [win, setWin] = useState(false)
+  const [howTo, setHowTo] = useState(false)
   const [time, setTime] = useState({ minutes: 0, seconds: 0 })
 
   const reset = () => {
+    setHowTo(false)
     setCharacters([])
     setcurrentImg('')
     setGameOn(false)
@@ -22,6 +24,7 @@ function App() {
   return (
     <div className="App">
       <AsideMenu
+        setHowTo={setHowTo}
         reset={reset}
         win={win}
         characters={characters}
@@ -31,6 +34,8 @@ function App() {
         gameOn={gameOn} />
       <main>
         <PhotoContainer
+          setHowTo={setHowTo}
+          howTo={howTo}
           win={win}
           time={time}
           setTime={setTime}

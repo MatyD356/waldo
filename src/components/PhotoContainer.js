@@ -3,8 +3,9 @@ import '../styles/PhotoContainer.scss'
 import Circle from './Circle'
 import GameControls from './GameControls'
 import WinInfo from './WinInfo'
+import GameInfo from './GameInfo'
 
-const PhotoContainer = ({ win, setWin, characters, updateCharacters, gameOn, updateGameOn, currentImg, loadImage, time }) => {
+const PhotoContainer = ({ win, setWin, characters, updateCharacters, gameOn, updateGameOn, currentImg, loadImage, time, setHowTo, howTo }) => {
 
   const [lastClick, setLastClick] = useState({ x: -1000, y: -1000 })
   const [imgName, setImgName] = useState('');
@@ -34,7 +35,6 @@ const PhotoContainer = ({ win, setWin, characters, updateCharacters, gameOn, upd
     }// eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(characters)])
 
-  //bug here
   const handleClick = (e) => {
     let newX = e.nativeEvent.offsetX
     let newY = e.nativeEvent.offsetY
@@ -42,7 +42,7 @@ const PhotoContainer = ({ win, setWin, characters, updateCharacters, gameOn, upd
   }
   return (
     <div className='PhotoContainer'>
-      {!gameOn ? <div className='game-controls-container'>
+      {howTo ? <GameInfo setHowTo={setHowTo} /> : !gameOn ? <div className='game-controls-container'>
         <GameControls
           setImgName={setImgName}
           imgName='picture-one'

@@ -13,7 +13,6 @@ const GameControls = ({ imgName, updateCharacters, gameOn, updateGameOn, loadIma
           updateGameOn(!gameOn)
         }}>Start
             </button>
-      <button className='control-button'>See scores</button>
     </div>
   )
 }
